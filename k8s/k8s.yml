@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: detai_2maven
+  name: detai2maven
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: detai_2maven-deployment
-  namespace: detai_2maven
+  namespace: detai2maven
 spec:
   replicas: 5
   selector:
@@ -31,7 +31,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: detai_2maven-service
-  namespace: detai_2maven
+  namespace: detai2maven
 spec:
   selector:
     app: detai_2maven
@@ -47,7 +47,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: detai_2maven-ingress
-  namespace: detai_2maven
+  namespace: detai2maven
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
