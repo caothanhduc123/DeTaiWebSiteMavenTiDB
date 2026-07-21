@@ -25,6 +25,40 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+      containers:
+      - name: detai2maven
+        image: caothanhduc/detai2maven:latest
+
+        env:
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: tidb-secret
+              key: DB_HOST
+
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              name: tidb-secret
+              key: DB_PORT
+
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: tidb-secret
+              key: DB_NAME
+
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: tidb-secret
+              key: DB_USER
+
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: tidb-secret
+              key: DB_PASSWORD
 
 ---
 apiVersion: v1
@@ -63,38 +97,4 @@ spec:
                 name: detai2maven-service
                 port:
                   number: 80
----
-containers:
-- name: detai2maven
-  image: caothanhduc/detai2maven:latest
 
-  env:
-  - name: DB_HOST
-    valueFrom:
-      secretKeyRef:
-        name: tidb-secret
-        key: DB_HOST
-
-  - name: DB_PORT
-    valueFrom:
-      secretKeyRef:
-        name: tidb-secret
-        key: DB_PORT
-
-  - name: DB_NAME
-    valueFrom:
-      secretKeyRef:
-        name: tidb-secret
-        key: DB_NAME
-
-  - name: DB_USER
-    valueFrom:
-      secretKeyRef:
-        name: tidb-secret
-        key: DB_USER
-
-  - name: DB_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: tidb-secret
-        key: DB_PASSWORD
