@@ -81,8 +81,7 @@ jobs:
       - name: Scan Docker Image
         run: |
           grype ${{ secrets.DOCKER_USERNAME }}/detai_2maven:latest --fail-on high
-      - name: Upload report
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: grype-report
           path: grype.json
