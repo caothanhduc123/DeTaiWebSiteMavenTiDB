@@ -69,7 +69,7 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Build Docker Image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/detai_2maven:latest .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/detai2maven:latest .
   # Quét lỗi các thư viện mã nguồn mở có lổ hổng SCA
     # sử dụng Grype
      # Quét lỗi các thư viện mã nguồn mở có lổ hổng SCA
@@ -80,13 +80,13 @@ jobs:
 
 #      - name: Scan Docker Image
 #        run: |
-#          grype ${{ secrets.DOCKER_USERNAME }}/detai_2maven:latest --fail-on high
+#          grype ${{ secrets.DOCKER_USERNAME }}/detai2maven:latest --fail-on high
       - uses: actions/upload-artifact@v4
         with:
           name: grype-report
           path: grype.json
       - name: Push Docker Image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/detai_2maven:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/detai2maven:latest
 
   deploy:
     needs: docker
@@ -105,5 +105,5 @@ jobs:
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f k8s/
-          kubectl rollout restart deployment/detai_2maven-deployment -n detai_2maven
-          kubectl rollout status deployment/detai_2maven-deployment -n detai_2maven
+          kubectl rollout restart deployment/detai2maven-deployment -n detai2maven
+          kubectl rollout status deployment/detai2maven-deployment -n detai2maven
