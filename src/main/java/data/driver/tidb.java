@@ -12,8 +12,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author parrot
- * OGre5d1aofbruVxO
+ * @author parrot OGre5d1aofbruVxO
  */
 public class tidb {
 
@@ -30,8 +29,13 @@ public class tidb {
     public tidb(String tenbangs) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-
-            String url = "jdbc:mysql://2hJSigBDqRmGQGa.root:OGre5d1aofbruVxO@gateway01.ap-southeast-1.prod.aws.tidbcloud.com:4000/Web_Cart?sslMode=VERIFY_IDENTITY";
+            String host = System.getenv("DB_HOST");
+            String port = System.getenv("DB_PORT");
+            String database = System.getenv("DB_NAME");
+            String user = System.getenv("DB_USER");
+            String password = System.getenv("DB_PASSWORD");
+            
+            String url = "jdbc:mysql"+ user +":"+ password +"@"+ host +":"+ port +"/"+ database +"?sslMode=VERIFY_IDENTITY";
 
             this.ketnoi = DriverManager.getConnection(url, "admin", "123");
             System.out.println("Kết nối thành công: " + (this.ketnoi != null));
