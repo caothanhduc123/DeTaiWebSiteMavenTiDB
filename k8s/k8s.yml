@@ -7,21 +7,21 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: detai_2maven-deployment
+  name: detai2maven-deployment
   namespace: detai2maven
 spec:
   replicas: 5
   selector:
     matchLabels:
-      app: detai_2maven
+      app: detai2maven
   template:
     metadata:
       labels:
-        app: detai_2maven
+        app: detai2maven
     spec:
       containers:
-        - name: detai_2maven
-          image: caothanhduc/detai_2maven:latest
+        - name: detai2maven
+          image: caothanhduc/detai2maven:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -30,11 +30,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: detai_2maven-service
+  name: detai2maven-service
   namespace: detai2maven
 spec:
   selector:
-    app: detai_2maven
+    app: detai2maven
   type: NodePort
   ports:
     - protocol: TCP
@@ -46,20 +46,20 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: detai_2maven-ingress
+  name: detai2maven-ingress
   namespace: detai2maven
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
-    - host: detai_2maven.local
+    - host: detai2maven.local
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: detai_2maven-service
+                name: detai2maven-service
                 port:
                   number: 80
