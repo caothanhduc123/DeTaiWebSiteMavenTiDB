@@ -1,0 +1,108 @@
+<%-- 
+    Document   : _chatbots
+    Created on : 19 thg 12, 2025, 14:09:26
+    Author     : parrot
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    /* Chat area */
+    .chat-body {
+        height: 300px;
+        overflow-y: auto;
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+    .chat-msg {
+        margin-bottom: 10px;
+    }
+    .chat-msg.user {
+        text-align: right;
+    }
+    .chat-msg.bot {
+        text-align: left;
+    }
+    .chatbot{
+        margin-right: 100px;
+        margin-bottom: 30px
+    }
+</style>
+<!-- Button to open chatbot -->
+<button
+  class="btn btn-primary position-fixed bottom-0 end-0  chatbot"
+  data-bs-toggle="modal"
+  data-bs-target="#chatbotModal"
+>
+  💬 Chat
+</button>
+
+
+<!-- CHATBOT MODAL -->
+<div class="modal fade" id="chatbotModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Chatbot</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="chat-body" id="chatBody">
+                    <!-- messages go here -->
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <input type="text" id="chatInput" class="form-control me-2" placeholder="Type a message..." />
+                <button class="btn btn-success" id="sendBtn">Send</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap 5.3 JS (with Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const chatBody = document.getElementById("chatBody");
+    const chatInput = document.getElementById("chatInput");
+    const sendBtn = document.getElementById("sendBtn");
+
+    function addMessage(text, sender) {
+        const msg = document.createElement("div");
+        msg.classList.add("chat-msg", sender);
+        msg.textContent = text;
+        chatBody.appendChild(msg);
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    sendBtn.onclick = () => {
+        const text = chatInput.value.trim();
+        if (!text)
+            return;
+
+        // Add user message
+        addMessage(text, "user");
+        chatInput.value = "";
+
+        // Simulate bot typing…
+        setTimeout(() => {
+            const reply = "Bot echo: " + text; // placeholder bot logic
+            addMessage(reply, "bot");
+        }, 500);
+    };
+
+    // Enter key send
+    chatInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            sendBtn.click();
+        }
+    });
+</script>
