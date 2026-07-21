@@ -77,9 +77,9 @@ jobs:
 
       - name: Scan Docker Image
         run: |
-          grype ${{ secrets.DOCKER_USERNAME }}/DeTai_2Maven:latest --fail-on high
+          grype ${{ secrets.DOCKER_USERNAME }}/detai_2maven:latest --fail-on high
       - name: Push Docker Image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/DeTai_2Maven:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/detai_2maven:latest
 
   deploy:
     needs: docker
@@ -98,5 +98,5 @@ jobs:
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f k8s/
-          kubectl rollout restart deployment/DeTai_2Maven-deployment -n DeTai_2Maven
-          kubectl rollout status deployment/DeTai_2Maven-deployment -n DeTai_2Maven
+          kubectl rollout restart deployment/detai_2maven-deployment -n detai_2maven
+          kubectl rollout status deployment/detai_2maven-deployment -n detai_2maven
