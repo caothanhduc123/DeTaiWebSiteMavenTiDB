@@ -78,9 +78,9 @@ jobs:
         run: |
           curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
 
-#      - name: Scan Docker Image
-#        run: |
-#          grype ${{ secrets.DOCKER_USERNAME }}/detai2maven:latest --fail-on high
+      - name: Scan Docker Image
+        run: |
+          grype ${{ secrets.DOCKER_USERNAME }}/detai2maven:latest --fail-on high
       - uses: actions/upload-artifact@v4
         with:
           name: grype-report
@@ -88,22 +88,22 @@ jobs:
       - name: Push Docker Image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/detai2maven:latest
 
-  deploy:
-    needs: docker
-    runs-on: self-hosted
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
-
-      - name: Check Runner
-        run: |
-          whoami
-          hostname
-          kubectl get nodes
-
-      - name: Deploy to Kubernetes
-        run: |
-          kubectl apply -f k8s/
-          kubectl rollout restart deployment/detai2maven-deployment -n detai2maven
-          kubectl rollout status deployment/detai2maven-deployment -n detai2maven
+#  deploy:
+#    needs: docker
+#    runs-on: self-hosted
+#
+#    steps:
+#      - name: Checkout source
+#        uses: actions/checkout@v4
+#
+#      - name: Check Runner
+#        run: |
+#          whoami
+#          hostname
+#          kubectl get nodes
+#
+#      - name: Deploy to Kubernetes
+#        run: |
+#          kubectl apply -f k8s/
+#          kubectl rollout restart deployment/detai2maven-deployment -n detai2maven
+#          kubectl rollout status deployment/detai2maven-deployment -n detai2maven
