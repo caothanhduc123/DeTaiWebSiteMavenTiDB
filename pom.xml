@@ -10,7 +10,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jakartaee>10.0.0</jakartaee>
-        <sonar.projectKey>Website0</sonar.projectKey>
+        <sonar.projectKey>DeTai_2Maven</sonar.projectKey>
         <sonar.organization>caothanhduc123</sonar.organization>
     </properties>
     
