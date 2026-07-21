@@ -4,7 +4,7 @@
 
 FROM tomcat:10.1-jdk21
 
-RUN rm -rf /usr/local/tomcat/DeTai_2Maven-1.0-SNAPSHOT/*
+RUN rm -rf /usr/local/tomcat/webapps/*
 
 COPY target/DeTai_2Maven-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war
 
