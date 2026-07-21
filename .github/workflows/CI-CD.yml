@@ -71,6 +71,8 @@ jobs:
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/detai_2maven:latest .
   # Quét lỗi các thư viện mã nguồn mở có lổ hổng SCA
     # sử dụng Grype
+     # Quét lỗi các thư viện mã nguồn mở có lổ hổng SCA
+    # sử dụng Grype
       - name: Install Grype
         run: |
           curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
