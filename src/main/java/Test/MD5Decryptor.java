@@ -23,7 +23,6 @@ public class MD5Decryptor {
     
 
     public static void main(String[] args) {
-        driver d = new driver("Car");
-        System.err.println(d.getKetnoi());
+        Database.getuser().Insert("ctducwebsite", "ctducwebsite@gmail.com", "0000000000", API.getMd5("123456"), "guest");
     }
 }
