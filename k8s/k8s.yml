@@ -19,6 +19,15 @@ spec:
       labels:
         app: detai2maven
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels:
+                  app: detai2maven
       containers:
         - name: detai2maven
           image: caothanhduc/detai2maven:latest
@@ -93,4 +102,14 @@ spec:
                 name: detai2maven-service
                 port:
                   number: 80
-
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: detai2maven-pdb
+  namespace: detai2maven
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: detai2maven
